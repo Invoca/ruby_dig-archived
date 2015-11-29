@@ -20,6 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
+```
 require 'ruby_dig'
 
 response = {mom: {first: "Marge", last: "Bouvier"},
@@ -31,6 +32,7 @@ response = {mom: {first: "Marge", last: "Bouvier"},
 
 response.dig(:kids, 1, :first)
 # => "Lisa"
+```
 
 ## Contributing
 
