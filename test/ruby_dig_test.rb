@@ -46,5 +46,13 @@ class RubyDigTest
         assert_equal nil, {first: "Homer", last: "Simpson"}.dig(:middle)
       end
     end
+
+    describe "Nested Hash and Array" do
+      it "navigates both" do
+        assert_equal 'Lisa', {mom: {first: "Marge", last: "Bouvier"},
+                              dad: {first: "Homer", last: "Simpson"},
+                              kids: [{first: "Bart"}, {first: "Lisa"}]}.dig(:kids, 1, :first)
+      end
+    end
   end
 end
