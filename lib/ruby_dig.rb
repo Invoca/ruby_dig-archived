@@ -11,12 +11,10 @@ module RubyDig
   end
 end
 
-_ = Array
 class Array
   include RubyDig
 end
 
-_ = Hash
 class Hash
   include RubyDig
 end
