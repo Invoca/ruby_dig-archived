@@ -10,10 +10,12 @@ module RubyDig
   end
 end
 
-class Array
-  include RubyDig
-end
+if RUBY_VERSION < '2.3'
+  class Array
+    include RubyDig
+  end
 
-class Hash
-  include RubyDig
+  class Hash
+    include RubyDig
+  end
 end
