@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Colin Kelley"]
   spec.email         = ["colin@invoca.com"]
   spec.summary       = %q{Pure Ruby implementation of Array#dig and Hash#dig for Ruby < 2.3.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/Invoca/ruby_dig"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
