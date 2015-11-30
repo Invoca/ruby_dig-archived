@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "ruby_dig"
   spec.version       = RubyDig::VERSION
   spec.authors       = ["Colin Kelley"]
-  spec.email         = ["colin@invoca.com"]
+  spec.email         = ["colindkelley@gmail.com"]
   spec.summary       = %q{Pure Ruby implementation of Array#dig and Hash#dig for Ruby < 2.3.}
   spec.homepage      = "https://github.com/Invoca/ruby_dig"
   spec.license       = "MIT"
