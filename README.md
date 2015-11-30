@@ -1,6 +1,6 @@
 # RubyDig
 
-TODO: Write a gem description
+This gem adds Hash#dig and Array#dig from Ruby 2.3+ to earlier versions of Ruby.  It is a no-op if you are running Ruby 2.3 or greater.
 
 ## Installation
 
@@ -20,7 +20,19 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+require 'ruby_dig'
+
+response = {mom: {first: "Marge", last: "Bouvier"},
+            dad: {first: "Homer", last: "Simpson"},
+            kids: [
+                {first: "Bart", last: "Simpson"},
+                {first: "Lisa", last: "Simpson"}
+            ]}
+
+response.dig(:kids, 1, :first)
+# => "Lisa"
+```
 
 ## Contributing
 
