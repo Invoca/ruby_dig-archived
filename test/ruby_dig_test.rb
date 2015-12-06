@@ -6,6 +6,12 @@ require 'minitest/autorun'
 require 'ruby_dig'
 
 class RubyDigTest
+  class Diggable
+    def dig(*keys)
+      keys
+    end
+  end
+
   describe RubyDig do
     describe "Array" do
       it "digs an array by index" do
@@ -27,6 +33,10 @@ class RubyDigTest
       it "returns nil when dig index not an integer" do
         assert_equal nil, ['zero', 'one', 'two'].dig(:four)
       end
+
+      it "digs into any object that implements dig" do
+        assert_equal [:a, :b], [0, Diggable.new].dig(1, :a, :b)
+      end
     end
 
     describe "Hash" do
@@ -44,6 +54,10 @@ class RubyDigTest
 
       it "returns nil when dig not found" do
         assert_equal nil, {first: "Homer", last: "Simpson"}.dig(:middle)
+      end
+
+      it "digs into any object that implements dig" do
+        assert_equal [:a, :b], {diggable: Diggable.new}.dig(:diggable, :a, :b)
       end
     end
 

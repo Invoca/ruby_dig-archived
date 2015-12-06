@@ -3,7 +3,7 @@ module RubyDig
     if value = (self[key] rescue nil)
       if rest.empty?
         value
-      elsif value.is_a?(RubyDig)
+      elsif value.respond_to?(:dig)
         value.dig(*rest)
       end
     end
