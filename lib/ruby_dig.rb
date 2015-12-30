@@ -1,6 +1,6 @@
 module RubyDig
   def dig(key, *rest)
-    if value = (self[key] rescue nil)
+    if value = self[key]
       if rest.empty?
         value
       elsif value.respond_to?(:dig)

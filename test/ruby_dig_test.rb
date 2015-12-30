@@ -30,8 +30,8 @@ class RubyDigTest
         assert_equal nil, ['zero', 'one', 'two'].dig(4)
       end
 
-      it "returns nil when dig index not an integer" do
-        assert_equal nil, ['zero', 'one', 'two'].dig(:four)
+      it "raises TypeError when dig index not an integer" do
+        assert_raises(TypeError) { ['zero', 'one', 'two'].dig(:four) }
       end
 
       it "digs into any object that implements dig" do
