@@ -1,11 +1,10 @@
 module RubyDig
   def dig(key, *rest)
-    if value = self[key]
-      if rest.empty?
-        value
-      elsif value.respond_to?(:dig)
-        value.dig(*rest)
-      end
+    value = self[key]
+    if value.nil? || rest.empty?
+      value
+    elsif value.respond_to?(:dig)
+      value.dig(*rest)
     end
   end
 end

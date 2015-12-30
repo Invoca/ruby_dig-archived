@@ -37,6 +37,10 @@ class RubyDigTest
       it "digs into any object that implements dig" do
         assert_equal [:a, :b], [0, Diggable.new].dig(1, :a, :b)
       end
+
+      it "returns the value false" do
+        assert_equal false, [:a, [true, false]].dig(1, 1)
+      end
     end
 
     describe "Hash" do
@@ -58,6 +62,10 @@ class RubyDigTest
 
       it "digs into any object that implements dig" do
         assert_equal [:a, :b], {diggable: Diggable.new}.dig(:diggable, :a, :b)
+      end
+
+      it "returns the value false" do
+        assert_equal false, {first: "Homer", last: "Simpson", sobber: false}.dig(:sobber)
       end
     end
 
