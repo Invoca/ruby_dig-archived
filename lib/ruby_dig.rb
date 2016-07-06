@@ -1,11 +1,12 @@
 module RubyDig
   def dig(key, *rest)
-    if value = (self[key] rescue nil)
-      if rest.empty?
-        value
-      elsif value.respond_to?(:dig)
-        value.dig(*rest)
-      end
+    value = self[key]
+    if value.nil? || rest.empty?
+      value
+    elsif value.respond_to?(:dig)
+      value.dig(*rest)
+    else
+      fail TypeError, "#{value.class} does not have #dig method"
     end
   end
 end

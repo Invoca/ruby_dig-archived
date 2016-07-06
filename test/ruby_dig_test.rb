@@ -22,20 +22,24 @@ class RubyDigTest
         assert_equal 'twelve', ['zero', ['ten', 'eleven', 'twelve'], 'two'].dig(1, 2)
       end
 
-      it "returns nil when nested array doesn't support dig" do
-        assert_equal nil, ['zero', 'one', 'two'].dig(1, 2)
+      it "raises TypeError when nested array doesn't support dig" do
+        assert_raises(TypeError) { ['zero', 'one', 'two'].dig(1, 2) }
       end
 
       it "returns nil when dig not found" do
         assert_equal nil, ['zero', 'one', 'two'].dig(4)
       end
 
-      it "returns nil when dig index not an integer" do
-        assert_equal nil, ['zero', 'one', 'two'].dig(:four)
+      it "raises TypeError when dig index not an integer" do
+        assert_raises(TypeError) { ['zero', 'one', 'two'].dig(:four) }
       end
 
       it "digs into any object that implements dig" do
         assert_equal [:a, :b], [0, Diggable.new].dig(1, :a, :b)
+      end
+
+      it "returns the value false" do
+        assert_equal false, [:a, [true, false]].dig(1, 1)
       end
     end
 
@@ -48,8 +52,8 @@ class RubyDigTest
         assert_equal 'Homer', {mom: {first: "Marge", last: "Bouvier"}, dad: {first: "Homer", last: "Simpson"}}.dig(:dad, :first)
       end
 
-      it "returns nil when nested hash doesn't support dig" do
-        assert_equal nil, {mom: {first: "Marge", last: "Bouvier"}, dad: "Homer Simpson"}.dig(:dad, :first)
+      it "raises TypeError when nested hash doesn't support dig" do
+        assert_raises(TypeError) { {mom: {first: "Marge", last: "Bouvier"}, dad: "Homer Simpson"}.dig(:dad, :first) }
       end
 
       it "returns nil when dig not found" do
@@ -58,6 +62,10 @@ class RubyDigTest
 
       it "digs into any object that implements dig" do
         assert_equal [:a, :b], {diggable: Diggable.new}.dig(:diggable, :a, :b)
+      end
+
+      it "returns the value false" do
+        assert_equal false, {first: "Homer", last: "Simpson", sobber: false}.dig(:sobber)
       end
     end
 
