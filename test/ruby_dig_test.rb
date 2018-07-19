@@ -69,6 +69,39 @@ class RubyDigTest
       end
     end
 
+    describe "Struct" do
+      Person = Struct.new(:first, :last, :misc)
+
+      it "digs a struct by key" do
+        assert_equal 'Homer', Person.new("Homer", "Simpson").dig(:first)
+      end
+
+      it "digs a struct by index" do
+        assert_equal 'Homer', Person.new("Homer", "Simpson").dig(0)
+      end
+
+      it "digs a nested struct by keys" do
+        assert_equal 'Bart', Person.new("Marge", "Bouvier", ["Lisa", "Bart", "Maggie"]).dig(:misc, 1)
+      end
+
+      it "raises TypeError when nested hash doesn't support dig" do
+        assert_raises(TypeError) { Person.new("Marge", "Bouvier", "Lisa").dig(:misc, 1) }
+      end
+
+      it "returns nil when dig not found" do
+        assert_equal nil, Person.new("Homer", "Simpson").dig(:invalid)
+        assert_equal nil, Person.new("Homer", "Simpson").dig(3)
+      end
+
+      it "digs into any object that implements dig" do
+        assert_equal [:a, :b], Person.new("Homer", "Simpson", Diggable.new).dig(:misc, :a, :b)
+      end
+
+      it "returns the value false" do
+        assert_equal false, Person.new("Homer", "Simpson", false).dig(:misc)
+      end
+    end
+
     describe "Nested Hash and Array" do
       it "navigates both" do
         assert_equal 'Lisa', {mom: {first: "Marge", last: "Bouvier"},
